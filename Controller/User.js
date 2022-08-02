@@ -1,18 +1,29 @@
+const Users = require('../Models/User')
+
 const User = {
-    list: (req, res) => {
-        res.status(200).send('Lista de usuarios')
+    list: async (req, res) => {
+        const users = await Users.find()
+        res.status(200).send(users)
     },
-    create: (req, res) => {
-        res.status(200).send('Crear usuario')
+    create: async (req, res) => {
+        const user = new Users(req.body)
+        const result = await user.save()
+        res.status(200).send(result._id)
     },
-    get: (req, res) => {
-        res.status(200).send('Obtener usuario')
+    get: async (req, res) => {
+        const { id } = req.params
+        const user = await Users.findById(id)
+        res.status(200).send(user)
     },
-    update: (req, res) => {
-        res.status(200).send('Actualizar un usuario')
+    update: async (req, res) => {
+        const { id } = req.params
+        await Users.findByIdAndUpdate(id, req.body)
+        res.sendStatus(204)
     },
-    delete: (req, res) => {
-        res.status(200).send('Eliminar un usuario')
+    delete: async (req, res) => {
+        const { id } = req.params
+        await Users.findByIdAndDelete(id)
+        res.sendStatus(200)
     }
 }
 

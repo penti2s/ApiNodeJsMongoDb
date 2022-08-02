@@ -53,4 +53,4 @@ const eliminarUno = async() => {
     const user = await User.findOneAndDelete({_id: '62e92e350efb04408a216a25'})
     console.log(user)
 }
-eliminarUno()
+//eliminarUno()
