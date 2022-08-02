@@ -1,11 +1,12 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const user = require('./Controller/User')
+require('dotenv').config()
 const app = express()
 const port = 3000
 
 app.use(express.json()) // para que se puedan recibir datos en formato json
-mongoose.connect('mongodb+srv://penti:pentiApiRest@cluster0.yse1t.mongodb.net/appApi?retryWrites=true&w=majority')
+mongoose.connect(process.env.URL_DB)
 
 app.get('/', user.list)
 

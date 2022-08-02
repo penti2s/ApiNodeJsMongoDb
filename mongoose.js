@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-mongoose.connect('mongodb+srv://penti:pentiApiRest@cluster0.yse1t.mongodb.net/appApi?retryWrites=true&w=majority')
+require('dotenv').config()
+mongoose.connect(process.env.URL_DB)
 
 //Creando Modelo de datos
 const User = mongoose.model('User', {
